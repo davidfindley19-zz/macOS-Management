@@ -5,7 +5,7 @@ echo "Garmin Mac Deployment Script"
 echo "Authors: Kyle Brewer, BJ Smith, David Findley"
 #echo "Purpose: Apple laptop deployment "
 echo "Date: January 17, 2016 "
-echo "Version: 2.2.2"
+echo "Version: 2.2.4"
 echo
  
 # Version 1.2 - Fixed some issues with spacing and responses are recognized as lower and uppercase.
@@ -14,7 +14,8 @@ echo
 #               due to crashing.
 # Version 2.2.1 - Added January security updates. Bringing the versions to 15.18.0
 # Version 2.2.3 - Cleaned up code. Simplified Office update functions. Rearranged menu to make it more functional. 
- 
+# Version 2.2.3 - Disable Office 2016 for Mac first run prompt
+
 # We need to execute as root to get some of this done.
 # If the executing user is not root, the script will exit with code 1.
 if [ "$USER" != "root" ]; then
@@ -226,7 +227,17 @@ function office_install()
         echo
         /usr/sbin/installer -pkg ./"Microsoft_Office_2016.pkg" -target "/"
  
-        office_2016_update  
+        office_2016_update
+        
+        echo "Disabling the application first run prompting"
+        defaults write /Library/Preferences/com.microsoft.Excel kSubUIAppCompletedFirstRunSetup1507 -bool true
+        defaults write /Library/Preferences/com.microsoft.onenote.mac kSubUIAppCompletedFirstRunSetup1507 -bool true
+        defaults write /Library/Preferences/com.microsoft.Outlook kSubUIAppCompletedFirstRunSetup1507 -bool true
+        defaults write /Library/Preferences/com.microsoft.Outlook FirstRunExperienceCompletedO15 -bool true
+        defaults write /Library/Preferences/com.microsoft.PowerPoint kSubUIAppCompletedFirstRunSetup1507 -bool true
+        defaults write /Library/Preferences/com.microsoft.Word kSubUIAppCompletedFirstRunSetup1507 -bool true
+        echo
+        echo "Package installation completed."     
  
     elif [ $response = no ] || [ $response = No ]; then
         echo "Office 2016 is the only package this script supports. Please manually install Office 2011. "
