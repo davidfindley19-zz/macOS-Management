@@ -8,3 +8,7 @@ A script that allows you to select from a menu different administration tasks. A
 # Adobe Install
 
 At the time of this being written, there was some confusion around whether or not all Macs deployed needed Adobe. The installs were too big for network installs, so this allows you to install from a local source such as a USB drive. 
+
+# NFS_Software_Install
+
+This was a test script written to see if we could store all software on a centralized repo and have it install. This centralized repo is Windows based and mounts it as such.
