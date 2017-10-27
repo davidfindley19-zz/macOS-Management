@@ -36,14 +36,13 @@ fi
 localhostname=$regionprefix$truncserial-MAC
  
 # Fully qualified DNS name of Active Directory domain.
-domain="ad.garmin.com"
+domain="enter domain name"
  
 # Distinguished name of intended container for this computer.
-#ou="OU=Macintosh,OU=Workstations,OU=Olathe,DC=ad,DC=garmin,DC=com"
-ou="OU=Macintosh,OU=Workstations,OU=Olathe,OU=Kansas,OU=United States,OU=North America,DC=ad,DC=garmin,DC=com"
+ou="Enter default OU path"
  
 # Name of network time server. Used to synchronize clocks.
-networktimeserver="time.garmin.com"
+networktimeserver="time server"
  
 ### Advanced options
  
@@ -71,10 +70,10 @@ user_shell="/bin/bash"
 # Use the specified server for all directory lookups and authentication.
 # (e.g. "-nopreferred" or "-preferred ad.server.edu")
 #preferred="-nopreferred"
-preferred="ad.garmin.com"
+preferred="preferred domain"
  
 # Comma-separated AD groups and users to be admins ("" or "DOMAIN\groupname").
-admingroups="GARMIN\domain admins,GARMIN\enterprise admins,GARMIN\OL_Helpdesk,GARMIN\US-IT-DesktopAdmins"
+admingroups="default admin groups to be used"
  
 ### End of configuration
  
@@ -188,7 +187,7 @@ function users()
     for username in ${localadmins[@]}
     do
         # Create mobile account for user(s) specified in @localadmins.
-        # Domain groups inherited as expected, i.e., members of GARMIN\US-IT-DesktopAdmins are admins.
+        # Domain groups inherited as expected, i.e., members of SPECIFIC GROUP are admins.
         # Note: this will pass two odd messages to the CLI, this is a known bug in ManagedClient.
         echo "Creating mobile account for user $username."
         echo "Expect two odd messages here. They do not indicate an error."
@@ -243,6 +242,9 @@ function office_install()
         echo "Office 2016 is the only package this script supports. Please manually install Office 2011. "
     fi
 }
+
+#Obviously old versions of Office. 
+
 function office_2016_update()
 {
     echo "***Installing Office 2016 updates***"
@@ -276,6 +278,7 @@ function office_2016_update()
 function summary()
 {
     # Sanity check. Rather than printing from variables, we'll query the system configuration for these values.
+    #This part brought to you by Kyle's amazing knowledge of awk. 
     echo "\n*** SUMMARY ***"
     echo "Hardware serial number:"
     ioreg -c IOPlatformExpertDevice -d 2 | awk -F\" '/IOPlatformSerialNumber/{print $(NF-1)}'
