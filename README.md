@@ -13,6 +13,6 @@ At the time of this being written, there was some confusion around whether or no
 
 This was a test script written to see if we could store all software on a centralized repo and have it install. This centralized repo is Windows based and mounts it as such.
 
-# JAMF_UPDATE
+# JAMF_Update
 
 This was written to help with the enrollment process of the Macs in our environment. Some older machines don't check in as quickly as needed. This allows us to keep an always updated install of the JAMF package on a network location and manually install/policy updates.
