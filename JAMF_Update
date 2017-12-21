@@ -27,13 +27,13 @@ clear
 
 function jamf_install()
 {
-  echo "\nInstalling the Quick Add package. This may take a few moments...\n"
+  echo "\nInstalling the Quick Add package. This may take a few moments..."
 
   # Now we need to make a mount point for the NFS share.
   
-  echo "\nMaking mount point directory\n"
+  echo "\nMaking mount point directory"
   mkdir /Volumes/FOLDER
-  echo "\nMounting remote network location\n"
+  echo "\nMounting remote network location"
   mount_smbfs "//$domainusername:$domainpass@FQDN/Scratch" /Volumes/FOLDER
   /usr/sbin/installer -pkg /Volumes/PATH/TO/DRIVE/QuickAdd.pkg -target "/"
   echo "\nThe JAMF Management software has been installed."
@@ -46,7 +46,7 @@ function jamf_install()
 
 function recon()
 { 
-	echo "\nChecking in with JSS\n"
+	echo "\nChecking in with JSS"
 	jamf recon
 	clear
 }
@@ -55,7 +55,7 @@ function recon()
 
 function policy()
 {
-  echo "\nForcing policy retrieval for machine\n"
+  echo "\nForcing policy retrieval for machine"
 	jamf policy
 	clear
 } 
