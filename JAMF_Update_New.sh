@@ -5,8 +5,8 @@
 # Date: December 20, 2017 [Updated 04-03-2019]
 # Version: 1.4
 # Change Log: 
-				#1.3 - Removed local requirement. Cleaned up code.
-				#1.4 - Updated mount command to mount -t
+			#1.3 - Removed local requirement. Cleaned up code.
+			#1.4 - Updated mount command to mount -t
 
 # Verifying that user is running the scrip with elevated permissions.
 if [ "$USER" != "root" ]; then
